@@ -1,0 +1,17 @@
+# Environment variables (contains secrets)
+.env
+
+# Flask session data
+flask_session/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Diagnostic scripts (optional to exclude, but let's keep it for now)
+# debug_msal.py

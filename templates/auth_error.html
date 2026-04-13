@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Error - SleekMail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="container error-container">
+        <div class="error-card">
+            <h1>Oops! Authentication Failed</h1>
+            <p>{{ error }}</p>
+            <a href="{{ url_for('index') }}" class="btn-primary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleekMail - Outlook Integration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
+</head>
+<body class="dark-theme">
+    <div class="glass-background"></div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i data-lucide="mail" class="logo-icon"></i>
+                <span>SleekMail</span>
+            </div>
+            <div class="nav-actions">
+                {% if user %}
+                    <div class="user-profile">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ user.name }}" alt="User Avatar" class="avatar">
+                        <span class="user-name">{{ user.name }}</span>
+                    </div>
+                    <a href="{{ url_for('logout') }}" class="btn-secondary">Sign Out</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn-primary">
+                        <i data-lucide="log-in" class="btn-icon"></i>
+                        Connect Outlook
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container main-content">
+        {% if not user %}
+            <section class="hero-section">
+                <h1 class="hero-title animate-up">Your Inbox, <span class="gradient-text">Redefined.</span></h1>
+                <p class="hero-subtitle animate-up delay-1">Access your Outlook emails with a modern, high-performance interface. Experience speed and elegance in one place.</p>
+                <div class="hero-cta animate-up delay-2">
+                    <a href="{{ url_for('login') }}" class="btn-hero">
+                        Get Started with Outlook
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </a>
+                </div>
+            </section>
+        {% else %}
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Inbox</h2>
+                    <button id="refreshEmails" class="btn-refresh">
+                        <i data-lucide="refresh-cw" class="btn-icon"></i>
+                        Refresh
+                    </button>
+                </div>
+                
+                <div id="emailList" class="email-grid">
+                    <!-- Emails will be loaded here via JS -->
+                    <div class="loader-container">
+                        <div class="loader"></div>
+                        <p>Fetching your messages...</p>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 SleekMail. Powered by Microsoft Graph.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
